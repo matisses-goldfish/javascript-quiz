@@ -1,6 +1,6 @@
 
 # Javascript Code Quiz 📚
-[![License: ](https://img.shields.io/badge/license--brightgreen)](https://opensource.org/licenses/)
+[![License: ](https://img.shields.io/badge/license-MIT-brightgreen)](https://opensource.org/licenses/)
 #### **Name:** Honore Nelson
 #### **Deployed Link:** https://matisses-goldfish.github.io/javascript-quiz/
 #### **Github Repo:** https://github.com/matisses-goldfish/javascript-quiz
@@ -9,6 +9,7 @@
 ##  Table of Contents:
 * [Description](#description)
 * [Acceptance Criteria](#acceptance-criteria)
+* [Demo](#demo)
 * [Installation](#installation)
 * [Usage Information](#usage)
 * [Testing Instructions](#testing)
@@ -35,6 +36,15 @@ THEN the game is over
 WHEN the game is over
 THEN I can save my initials and my score
 ```
+
+## Demo
+---
+![Landing Page](assets/img/landing.png)
+![Questions Page](assets/img/questions.png)
+![Game Over Page](assets/img/gameover.png)
+![Stats Page](assets/img/stats.png)
+
+
 ## Usage
 ---
 Begin the applicant by clicking on the deployed link above.
