@@ -1,0 +1,27 @@
+#summary {
+    margin:2%;
+}
+#nameInput{
+    margin:2%;
+}
+#nameBtn{
+    margin:2%;
+}
+#scoreDiv{
+    padding:2%;
+}
+#playAgainBtn{
+    margin:2%;
+}
+#highScores{
+    border-radius: 3px;
+    font-size: 30px;
+}
+#statBoard{
+    margin: 2%;
+    padding:2%;
+    font-size: 20px;
+}
+#clearScoreBtn{
+    align-items: center;
+}
