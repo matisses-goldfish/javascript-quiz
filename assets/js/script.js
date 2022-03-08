@@ -2,7 +2,7 @@
 
 // Iniatial Landing Page for Quiz
 var startQuizDiv = document.getElementById("startQuizDiv");
-
+// new comment to push changes to main
 // time vars
 var time = document.getElementById("time");
 var remainingTime = document.getElementById("remainingTime");
