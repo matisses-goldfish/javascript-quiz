@@ -1,4 +1,4 @@
-// code formated after: https://github.com/mmeii/code-quiz/blob/main/Assets/script.js
+// code formated a Mengmei Tu: https://github.com/mmeii/code-quiz/blob/main/Assets/script.js
 
 // Iniatial Landing Page for Quiz
 var startQuizDiv = document.getElementById("startQuizDiv");
@@ -13,30 +13,28 @@ var startBtn = document.getElementById("startBtn");
 var playAgainBtn = document.getElementById("playAgainBtn");
 
 // question shuffle vars
-var questionDiv = document.getElementById("questionDiv");
-var questionTitle = document.getElementById("questionTitle");
-var choiceA = document.getElementById("btnA");
-var choiceB = document.getElementById("btnB");
-var choiceC = document.getElementById("btnC");
-var choiceD = document.getElementById("btnD");
+var questContainer = document.getElementById("questContainer");
+var questHeader = document.getElementById("questHeader");
+var buttonA = document.getElementById("btnA");
+var buttonB = document.getElementById("btnB");
+var buttonC = document.getElementById("btnC");
+var buttonD = document.getElementById("btnD");
 var answerCheck = document.getElementById("answerCheck");
 
 // end/score vars
-var summary = document.getElementById("summary");
+var endGame = document.getElementById("endGame");
 var nameInput = document.getElementById("nameInput");
 var nameBtn = document.getElementById("nameBtn");
 var statName = document.getElementById("statName");
-var finalScore = document.getElementById("finalScore");
+var scoreBoard = document.getElementById("scoreBoard");
 var highScores = document.getElementById("highScores");
 var nameForm = document.getElementById("nameForm");
-var clearScoreBtn = document.getElementById("clearScoreBtn");
+var clearAllScores = document.getElementById("clearAllScores");
 
 
 // declaring basic vars
-var correctAns = 0;
-var questionNum = 0;
-var scoreResult;
-var questionIndex = 0;
+var correction = 0;
+var quizNum = 0;
 
 
 // Questions
@@ -52,8 +50,13 @@ var totalQuest = [
       correctAnswer: "W3C"
     },
     {
+        question: "What does Props stand for in React?",
+        choices: ["propositions", "prophets", "propagations", "properties"],
+        correctAnswer: "properties"
+    },
+    {
       question: "What does AJAX stand for?",
-      choices: ["Asynchronous JavaScript And XML", "Application-based Jscript And XPL", "Asymchronous Java And XC", "Application-based Jython And XL"],
+      choices: ["Asymchronous Java And XC", "Application-based Jscript And XPL", "Asynchronous JavaScript And XML", "Application-based Jython And XL"],
       correctAnswer: "Asynchronous JavaScript And XML"
     },
     {
@@ -62,103 +65,116 @@ var totalQuest = [
       correctAnswer: "a control flow statement for specifying iteration, allows code to be executed repeatedly"
     },
     {
+        question: "What character do you preferace a Declaration Block with in CSS for a class selector?",
+        choices: [".", "#", "$", "//"],
+        correctAnswer: "."
+    },
+    {
       question: "An if/else statement is enclosed with which of the following?",
-      choices: ["curly brackets", "square brackets", "parenthesis", "asterisks"],
+      choices: ["curly brackets", "square brackets", "asterisks", "parenthesis"],
       correctAnswer: "parenthesis"
-    }
+    },
+    {
+        question: "What does an Asynchronous API do?",
+        choices: ["iniatializes the backend of your web application", "establishes the client server connection", "computes the local host within the broswer", "collects and returns data for requests"],
+        correctAnswer: "collects and returns data for requests"
+    },
+    {
+        question: "How would you target a Pseudo-Element in CSS?",
+        choices: ["{}", "::", "//", "[]"],
+        correctAnswer: "::"
+    },
+    {
+        question: "Why is alt text needed but not required?",
+        choices: ["Used to establish sections of an HTML page, and an attribute of the anchor tag", "a statement that declares either a local or global variable", "increases accessibility and performance on google", "creates a global directory that increases preformace and time on code"],
+        correctAnswer: "increases accessibility and performance on google"
+    },
+    
   ];
 
 // time and quiz shuffle
-startBtn.addEventListener("click", newQuiz);
-choiceA.addEventListener("click", chooseA);
-choiceB.addEventListener("click", chooseB);
-choiceC.addEventListener("click", chooseC);
-choiceD.addEventListener("click", chooseD);
+startBtn.addEventListener("click", startQuest);
+buttonA.addEventListener("click", number0);
+buttonB.addEventListener("click", number1);
+buttonC.addEventListener("click", number2);
+buttonD.addEventListener("click", number3);
 
-var totalTime = 151;
-function newQuiz() {
-    questionIndex = 0;
-    totalTime = 150;
-    remainingTime.textContent = totalTime;
+var playerClock = 151;
+function startQuest() {
+    quizNum = 0;
+    playerClock = 150;
+    remainingTime.textContent = playerClock;
     nameInput.textContent = "";
 
     startQuizDiv.style.display = "none";
-    questionDiv.style.display = "block";
+    questContainer.style.display = "block";
     time.style.display = "block";
     endTime.style.display = "none";
 
     var startTimer = setInterval(function() {
-        totalTime--;
-        remainingTime.textContent = totalTime;
-        if(totalTime <= 0) {
+        playerClock--;
+        remainingTime.textContent = playerClock;
+        if(playerClock <= 0) {
             clearInterval(startTimer);
-            if (questionIndex < question.length - 1) {
-                gameOver();
+            if (quizNum < question.length - 1) {
+                stopGame();
             }
         }
     },1000);
 
-    showQuiz();
+    displayQuest();
 };
 
 // question shuffle 
-function showQuiz() {
-    nextQuestion();
+function displayQuest() {
+    following();
 }
 
-function nextQuestion() {
-    questionTitle.textContent = totalQuest[questionIndex].question;
-    choiceA.textContent = totalQuest[questionIndex].choices[0];
-    choiceB.textContent = totalQuest[questionIndex].choices[1];
-    choiceC.textContent = totalQuest[questionIndex].choices[2];
-    choiceD.textContent = totalQuest[questionIndex].choices[3];
+function following() {
+    questHeader.textContent = totalQuest[quizNum].question;
+    buttonA.textContent = totalQuest[quizNum].choices[0];
+    buttonB.textContent = totalQuest[quizNum].choices[1];
+    buttonC.textContent = totalQuest[quizNum].choices[2];
+    buttonD.textContent = totalQuest[quizNum].choices[3];
 }
 
 // check answer 
-function checkAnswer(correctAnswer) {
-
-    var lineBreak = document.getElementById("lineBreak");
-    lineBreak.style.display = "block";
+function displayAnswer(correctAnswer) {
     answerCheck.style.display = "block";
 
-    if (totalQuest[questionIndex].correctAnswer === totalQuest[questionIndex].choices[correctAnswer]) {
-        // correct answer, add 1 score to final score
-        correctAns++;
-        // console.log(correctAns);
+    if (totalQuest[quizNum].correctAnswer === totalQuest[quizNum].choices[correctAnswer]) {
+        correction++;
         answerCheck.textContent = "Correct!";
     } else {
-        // wrong answer, deduct 10 second from timer
-        totalTime -= 10;
-        remainingTime.textContent = totalTime;
-        answerCheck.textContent = "Wrong! The correct answer is: " + totalQuest[questionIndex].correctAnswer;
+        playerClock -= 10;
+        remainingTime.textContent = playerClock;
+        answerCheck.textContent = "Wrong! The correct answer is: " + totalQuest[quizNum].correctAnswer;
     }
 
-    questionIndex++;
-    // repeat with the rest of questions 
-    if (questionIndex < totalQuest.length) {
-        nextQuestion();
+    quizNum++;
+    if (quizNum < totalQuest.length) {
+        following();
     } else {
-        // if no more question, run game over function
-        gameOver();
+        stopGame();
     }
 }
 
-function chooseA() { checkAnswer(0); }
+function number0() { displayAnswer(0); }
 
-function chooseB() { checkAnswer(1); }
+function number1() { displayAnswer(1); }
 
-function chooseC() { checkAnswer(2); }
+function number2() { displayAnswer(2); }
 
-function chooseD() { checkAnswer(3); }
+function number3() { displayAnswer(3); }
 
 // game over
-function gameOver() {
-    summary.style.display = "block";
-    questionDiv.style.display = "none";
+function stopGame() {
+    endGame.style.display = "block";
+    questContainer.style.display = "none";
     time.style.display = "none";
     endTime.style.display = "block";
 
-    finalScore.textContent = correctAns;
+    scoreBoard.textContent = correction;
 }
 
 // store high score:
@@ -166,17 +182,17 @@ function storeScores (event){
     event.preventDefault();
 
         if (nameInput.value === "") {
-        alert("Please enter your name");
+        alert("please leave your name");
         return;
     } 
 
     nameForm.style.display = "none";
     highScores.style.display = "block";   
-    summary.style.display = "block";
-    questionDiv.style.display = "none";
+    endGame.style.display = "block";
+    questContainer.style.display = "none";
     time.style.display = "none";
     endTime.style.display = "block";
-    clearScoreBtn.style.display = "block";
+    clearAllScores.style.display = "block";
 
     var savedScore = localStorage.getItem("high scores");
     var scoresArray;
@@ -187,13 +203,13 @@ function storeScores (event){
         scoresArray = JSON.parse(savedScore)
     }
 
-    var userScore = {
+    var clientStats = {
         name: nameInput.value,
-        score: finalScore.textContent
+        score: scoreBoard.textContent
     };
 
-    console.log(userScore);
-    scoresArray.push(userScore);
+    console.log(clientStats);
+    scoresArray.push(clientStats);
 
     var scoresArrayString = JSON.stringify(scoresArray);
     window.localStorage.setItem("high scores", scoresArrayString);
@@ -207,40 +223,40 @@ var i = 0;
 function showHighScores() {
 
     time.style.display = "none";
-    questionDiv.style.display = "none";
+    questContainer.style.display = "none";
     endTime.style.display = "block";
-    summary.style.display = "block";
+    endGame.style.display = "block";
     remainingTime.style.display = "none";
     highScores.style.display = "block";
 
-    var savedHighScores = localStorage.getItem("high scores");
+    var statsBoard = localStorage.getItem("high scores");
 
     // check if there is any in local storage
-    if (savedHighScores === null) {
+    if (statsBoard === null) {
         return;
     }
-    console.log(savedHighScores);
+    console.log(statsBoard);
 
-    var storedHighScores = JSON.parse(savedHighScores);
+    var savedStats = JSON.parse(statsBoard);
 
-    for (; i < storedHighScores.length; i++) {
-        var eachNewHighScore = document.createElement("div");
-        eachNewHighScore.setAttribute('class', 'card text-left');
-        eachNewHighScore.setAttribute('id', 'statBoard');
-        eachNewHighScore.innerHTML =  "Name: " + storedHighScores[i].name + " Score: " + storedHighScores[i].score ;
-        highScores.appendChild(eachNewHighScore);
+    for (; i < savedStats.length; i++) {
+        var newStat = document.createElement("div");
+        newStat.setAttribute('class', 'card text-left');
+        newStat.setAttribute('id', 'statBoard');
+        newStat.innerHTML =  "Name: " + savedStats[i].name + " Stats: " + savedStats[i].score ;
+        highScores.appendChild(newStat);
     }
 }
 // Display Stats
 nameBtn.addEventListener("click", function(event){ 
-    storeScores(event);
-    
+    storeScores(event); 
 });
+
 // clear scores
-clearScoreBtn.addEventListener("click", function(){
+clearAllScores.addEventListener("click", function(){
     window.localStorage.clear("statBoard");
-    highScores.innerHTML = "Stats Are Cleared!";
-    clearScoreBtn.style.display = "none";
+    highScores.innerHTML = "Cleared Stats Board!";
+    clearAllScores.style.display = "none";
 });
 
 // Play Again

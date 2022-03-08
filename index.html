@@ -19,7 +19,7 @@
     <!-- iniatial page -->
     <div class="container text-dark text-center p-4" id="startQuizDiv">
       <h1 class="display-4">Code Quiz!</h1>
-      <p class="lead"> Click the button bellow to being your timed quiz</p>
+      <p class="lead"> This code quiz covers everything from MERN to simple CSS! Click the button bellow to being your timed quiz</p>
       <p class="lead">
         <button
           class="btn btn-primary btn-lg btn-dark text-light"
@@ -27,26 +27,25 @@
           href="#"
           role="button"
         >
-          Begin Quiz
+          Begin
         </button>
       </p>
     </div>
 
-    <div class="container" id="questionDiv" style="display: none;">
+    <div class="container" id="questContainer" style="display: none;">
       <h2>Question:</h2>
-      <h4 id="questionTitle"></h4>
+      <h4 id="questHeader"></h4>
       <p><button id="btnA" class="btn btn-primary answer-button-click"></button></p>
       <p><button id="btnB" class="btn btn-primary answer-button-click"></button></p>
       <p><button id="btnC" class="btn btn-primary answer-button-click"></button></p>
       <p><button id="btnD" class="btn btn-primary answer-button-click"></button></p>
       <p id="notify" style="display:none;"></p>
-      <br id="lineBreak"> 
       <div>
         <p id="answerCheck" class=""> </p>
       </div>
     </div>
 
-    <div style="display: none; margin:2%;" id="summary">
+    <div style="display: none; margin:2%;" id="endGame">
       <div class="container text-dark text-center p-4" id="">
         <h1 class="display-4">Game Over!</h1>
         <div id="nameForm">
@@ -60,11 +59,11 @@
         <h3> Stats:</h3>
         <div id="highScores">
             <div class="card text-center bg-success text-white font-weight-bold" id="scoreDiv">
-              <p> Score:<span id="finalScore"></span></p>
+              <p> Score:<span id="scoreBoard"></span></p>
             </div>
         </div>
 
-        <button type="submit" class="btn btn-danger text-center" id="clearScoreBtn" style="display:none;"> Clear Scoreboard </button>
+        <button type="submit" class="btn btn-danger text-center" id="clearAllScores" style="display:none;"> Clear Stats </button>
         <button type="submit" class="btn btn-primary" id="playAgainBtn">Play Again!</button>
       </div>
   </div>
