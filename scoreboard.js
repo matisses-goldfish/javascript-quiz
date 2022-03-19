@@ -1,4 +1,17 @@
 // declare my vars
+var playAgainBtn = document.querySelector("playAgainBtn");
+
+var nameBtn = document.querySelector("#nameBtn");
+var statName = document.querySelector("#statName");
+var highScores = document.querySelector("#highScores");
+var nameForm = document.querySelector("#nameForm");
+var clearAllScores = document.querySelector("#clearAllScores");
+
+var questContainer = document.querySelector("#questContainer");
+
+var nameInput = document.querySelector("#nameInput");
+var scoreBoard = document.querySelector("#scoreBoard");
+
 
 var endGame = document.querySelector("#endGame");
 
@@ -14,10 +27,15 @@ function hideElements () {
 
 
 // add name
-nameBtn.addEventListener("click", storeScores);
+nameBtn.addEventListener("click", storeAndAppend);
 
 // storeScores
 function storeAndAppend () {
+    hideElements();
+
+    nameForm.style.display = "none";
+    highScores.style.display = "block";   
+    clearAllScores.style.display = "block";
 
     scoreBoard.textContent = playerPoints;
     // take playerPoints and append with name input into json local storage and score board

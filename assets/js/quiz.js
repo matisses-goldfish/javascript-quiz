@@ -11,34 +11,34 @@ beginQuizBtn.addEventListener("click", beginQuiz);
 // Questions
 var renderQuestions = document.querySelector("#renderQuestions");
 var singleQuestion = document.querySelector("#singleQuestion");
-var userAnswers = document.querySelector("#userAnswers");
+var singleAnswer = document.querySelector(".singleAnswer");
 
 // Iniatialize Answer buttons: 
 
     // Button A
     var answerClickA = document.querySelector("#answerClickA");
-    answerClickA.addEventListener("click", displayA);
+    answerClickA.addEventListener("click", alertCorrect);
     // checks if the answer selected is correct
-    function displayA() { alertCorrect(0); }
+    // function displayA() { alertCorrect(A); }
 
 
     // Button B
     var answerClickB = document.querySelector("#answerClickB");
-    answerClickB.addEventListener("click", displayB);
+    answerClickB.addEventListener("click", alertCorrect);
     // checks if the answer selected is correct
-    function displayB() { alertCorrect(1); }
+    // function displayB() { alertCorrect(B); }
 
     // Button C
     var answerClickC = document.querySelector("#answerClickC");
-    answerClickC.addEventListener("click", displayC);
+    answerClickC.addEventListener("click", alertCorrect);
     // checks if the answer selected is correct
-    function displayC() { alertCorrect(2); }
+    // function displayC() { alertCorrect(C); }
 
     // Button D
     var answerClickD = document.querySelector("#answerClickD");
-    answerClickD.addEventListener("click", displayD);
+    answerClickD.addEventListener("click", alertCorrect);
     // checks if the answer selected is correct
-    function displayD() { alertCorrect(3); }
+    // function displayD() { alertCorrect(D); }
 
 
 
@@ -86,28 +86,28 @@ function beginQuiz () {
 
 // render questions 
 function renderQuestionIndex () {
-    ulCreate.innerHTML = "";
-
         for (var i = 0; i < totalQuest.length; i++) {
-        // renders question
         var questionTitle = totalQuest[questionNumber].question;
         singleQuestion.textContent = questionTitle;
         }
 }
 
 // render choices 
+
 function renderChoices () {
-    answerClickA.textContent = totalQuest[questionNumber].choices[0];
-    answerClickB.textContent = totalQuest[questionNumber].choices[1];
-    answerClickC.textContent = totalQuest[questionNumber].choices[2];
-    answerClickD.textContent = totalQuest[questionNumber].choices[3];
+    var quizAnswers = totalQuest[questionNumber];
+    answerClickA.textContent = quizAnswers.A;
+    answerClickB.textContent = quizAnswers.B;
+    answerClickC.textContent = quizAnswers.C;
+    answerClickD.textContent = quizAnswers.D;
 }
+
+
 
 // quiz timer
 // timer based on: https://stackoverflow.com/questions/44314897/javascript-timer-for-a-quiz 
 function beginTime () {
     quizTimer = 100;
-
     var interval = setInterval(function(){
         quizTimer--;
         remainingTime.textContent = quizTimer;
@@ -115,18 +115,15 @@ function beginTime () {
         // quizTimer === 0 wasnt computing???
         if (quizTimer <= 0){
           clearInterval(interval);
-          hideElements ();
-          storeAndAppend ();
-            
+        //   hideElements ();
+        //   storeAndAppend ();
         }
       }, 1000);
     }
 
-    var ulCreate = document.createElement("ul");
-
 // display correct
-function alertCorrect(correctAnswer) {
-    if (totalQuest[questionNumber].correctAnswer === totalQuest[questionNumber].choices[correctAnswer]) {
+function alertCorrect(answer) {
+    if (answer === totalQuest[questionNumber].correctAnswer) {
         playerPoints +=100;
         correction.style.display= "block"
         correction.textContent = "Correct! Nicely Done!";
@@ -138,7 +135,23 @@ function alertCorrect(correctAnswer) {
     }
 }
 
+// function checkAnswer(answer){
+//     correct = quizQuestions[currentQuestionIndex].correctAnswer;
 
+//     if (answer === correct && currentQuestionIndex !== finalQuestionIndex){
+//         score++;
+//         alert("That Is Correct!");
+//         currentQuestionIndex++;
+//         generateQuizQuestion();
+//         //display in the results div that the answer is correct.
+//     }else if (answer !== correct && currentQuestionIndex !== finalQuestionIndex){
+//         alert("That Is Incorrect.")
+//         currentQuestionIndex++;
+//         generateQuizQuestion();
+//         //display in the results div that the answer is wrong.
+//     }else{
+//         showScore();
+    
 
 
 function nextQuestion() {
@@ -148,19 +161,11 @@ function nextQuestion() {
         renderChoices();
         correction.style.display= "none"
     } else {
-        hideElements ();
-        storeAndAppend ();    
+        // hideElements ();
+        // storeAndAppend ();    
     }
 }
 
 
-// I might be able to remove this 
-function endGame () {
-    endGame.style.display = "block";
-    renderQuestions.style.display = "none";
-    time.style.display = "none";
-    remainingTime.style.display = "none";
-    endTime.style.display = "block";    
-
-    scoreBoard.textContent = playerPoints;
-}
+// hideElements ();
+// storeAndAppend ();
