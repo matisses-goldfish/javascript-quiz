@@ -31,10 +31,10 @@
         <h2>Questions:</h2>
         <h4 id="singleQuestion"></h4>
         <ul>
-        <li><button class="btn btn-primary answerClick" id="answerClickA"><p class="singleAnswer"></p></button></li>
-        <li><button class="btn btn-primary answerClick" id="answerClickB"> <p class="singleAnswer"></p></button></li>
-        <li><button class="btn btn-primary answerClick" id="answerClickC"><p class="singleAnswer"></p></button></li>
-        <li><button class="btn btn-primary answerClick" id ="answerClickD"><p class="singleAnswer"></p></button></li>
+        <li><button class="btn btn-primary answerClick" id="answerClickA" onclick="alertCorrect('a')" ><p class="singleAnswer"></p></button></li>
+        <li><button class="btn btn-primary answerClick" id="answerClickB" onclick="alertCorrect('b')"> <p class="singleAnswer"></p></button></li>
+        <li><button class="btn btn-primary answerClick" id="answerClickC" onclick="alertCorrect('c')"><p class="singleAnswer"></p></button></li>
+        <li><button class="btn btn-primary answerClick" id ="answerClickD" onclick="alertCorrect('d')"><p class="singleAnswer"></p></button></li>
         </yl>
         <p id="alert" style="display:none;"></p>
         <div>
@@ -73,6 +73,6 @@
 
 <script src="./assets/js/questions.js"></script>
 <script src="./assets/js/quiz.js"></script>
-<!-- <script src="./scoreboard.js"></script> -->
+<script src="./scoreboard.js"></script>
 
 </html>

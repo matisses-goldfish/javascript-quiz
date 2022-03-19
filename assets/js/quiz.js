@@ -14,33 +14,14 @@ var singleQuestion = document.querySelector("#singleQuestion");
 var singleAnswer = document.querySelector(".singleAnswer");
 
 // Iniatialize Answer buttons: 
-
     // Button A
     var answerClickA = document.querySelector("#answerClickA");
-    answerClickA.addEventListener("click", alertCorrect);
-    // checks if the answer selected is correct
-    // function displayA() { alertCorrect(A); }
-
-
     // Button B
     var answerClickB = document.querySelector("#answerClickB");
-    answerClickB.addEventListener("click", alertCorrect);
-    // checks if the answer selected is correct
-    // function displayB() { alertCorrect(B); }
-
     // Button C
     var answerClickC = document.querySelector("#answerClickC");
-    answerClickC.addEventListener("click", alertCorrect);
-    // checks if the answer selected is correct
-    // function displayC() { alertCorrect(C); }
-
     // Button D
     var answerClickD = document.querySelector("#answerClickD");
-    answerClickD.addEventListener("click", alertCorrect);
-    // checks if the answer selected is correct
-    // function displayD() { alertCorrect(D); }
-
-
 
 // Next Question
 nextQuestionBtn = document.querySelector("#nextQuestionBtn")
@@ -93,13 +74,12 @@ function renderQuestionIndex () {
 }
 
 // render choices 
-
 function renderChoices () {
     var quizAnswers = totalQuest[questionNumber];
-    answerClickA.textContent = quizAnswers.A;
-    answerClickB.textContent = quizAnswers.B;
-    answerClickC.textContent = quizAnswers.C;
-    answerClickD.textContent = quizAnswers.D;
+    answerClickA.textContent = quizAnswers.answerA;
+    answerClickB.textContent = quizAnswers.answerB;
+    answerClickC.textContent = quizAnswers.answerC;
+    answerClickD.textContent = quizAnswers.answerD;
 }
 
 
@@ -115,15 +95,14 @@ function beginTime () {
         // quizTimer === 0 wasnt computing???
         if (quizTimer <= 0){
           clearInterval(interval);
-        //   hideElements ();
-        //   storeAndAppend ();
+          renderScore ();
         }
       }, 1000);
     }
 
 // display correct
-function alertCorrect(answer) {
-    if (answer === totalQuest[questionNumber].correctAnswer) {
+function alertCorrect(userAnswer) {
+    if (userAnswer === totalQuest[questionNumber].correctAnswer) {
         playerPoints +=100;
         correction.style.display= "block"
         correction.textContent = "Correct! Nicely Done!";
@@ -135,25 +114,6 @@ function alertCorrect(answer) {
     }
 }
 
-// function checkAnswer(answer){
-//     correct = quizQuestions[currentQuestionIndex].correctAnswer;
-
-//     if (answer === correct && currentQuestionIndex !== finalQuestionIndex){
-//         score++;
-//         alert("That Is Correct!");
-//         currentQuestionIndex++;
-//         generateQuizQuestion();
-//         //display in the results div that the answer is correct.
-//     }else if (answer !== correct && currentQuestionIndex !== finalQuestionIndex){
-//         alert("That Is Incorrect.")
-//         currentQuestionIndex++;
-//         generateQuizQuestion();
-//         //display in the results div that the answer is wrong.
-//     }else{
-//         showScore();
-    
-
-
 function nextQuestion() {
     questionNumber++;
     if (questionNumber < totalQuest.length) {
@@ -161,11 +121,21 @@ function nextQuestion() {
         renderChoices();
         correction.style.display= "none"
     } else {
-        // hideElements ();
-        // storeAndAppend ();    
+        renderScore();   
     }
 }
 
 
+
 // hideElements ();
 // storeAndAppend ();
+
+ function renderScore () {
+    endGame.style.display = "block";
+    renderQuestions.style.display = "none";
+    time.style.display = "none";
+    remainingTime.style.display = "none";
+    endTime.style.display = "block";  
+
+    scoreBoard.textContent = playerPoints;
+ }

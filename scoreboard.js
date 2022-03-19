@@ -1,49 +1,79 @@
-// declare my vars
-var playAgainBtn = document.querySelector("playAgainBtn");
+// Scoreboard
+var scoreBoard = document.querySelector("#scoreBoard");
+var highScores = document.querySelector("#highScores");
+
+// create Iniatials/Name
+var nameForm = document.querySelector("#nameForm");
+var nameInput = document.querySelector("#nameInput");
 
 var nameBtn = document.querySelector("#nameBtn");
-var statName = document.querySelector("#statName");
-var highScores = document.querySelector("#highScores");
-var nameForm = document.querySelector("#nameForm");
-var clearAllScores = document.querySelector("#clearAllScores");
-
-var questContainer = document.querySelector("#questContainer");
-
-var nameInput = document.querySelector("#nameInput");
-var scoreBoard = document.querySelector("#scoreBoard");
-
-
-var endGame = document.querySelector("#endGame");
-
-// hide elements that isnt the scoreboard 
-function hideElements () {
-    endGame.style.display = "block";
-    renderQuestions.style.display = "none";
-    time.style.display = "none";
-    remainingTime.style.display = "none";
-    endTime.style.display = "block";    
-    // declare display: none; for everything you want hidden
-}
-
-
-// add name
 nameBtn.addEventListener("click", storeAndAppend);
 
-// storeScores
-function storeAndAppend () {
-    hideElements();
+var statName = document.querySelector("#statName");
 
+// Clear scores / Play again
+var clearAllScores = document.querySelector("#clearAllScores");
+var endGame = document.querySelector("#endGame");
+var playAgainBtn = document.querySelector("playAgainBtn");
+
+function pageformat () {
     nameForm.style.display = "none";
     highScores.style.display = "block";   
     clearAllScores.style.display = "block";
+}
+
+function storeAndAppend () {
+    renderScore();
+    pageformat ();
 
     scoreBoard.textContent = playerPoints;
+
+    var userScore = localStorage.getItem("high scores");
+    var scoresArray = []
+    if (userScore === null) {
+        scoresArray;
+    } else {
+        scoresArray = JSON.parse(userScore)
+    }
+
+    var clientStats = {
+        name: nameInput.value,
+        score: playerPoints
+    };
+
+    console.log(clientStats);
+    scoresArray.push(clientStats);
+
+    var scoresArrayString = JSON.stringify(scoresArray);
+    window.localStorage.setItem("high scores", scoresArrayString);
+    
+    // show current highscores
+    displayScoreBoard();
     // take playerPoints and append with name input into json local storage and score board
 }
 
 // display scores 
 // might not need this
-function displayScoreBoard () {
+var i = 0;
+function displayScoreBoard() {
+
+    renderScore();
+
+    var statsBoard = localStorage.getItem("high scores");
+
+    // check if there is any in local storage
+    if (statsBoard === null) {
+        return;
+    }
+    var savedStats = JSON.parse(statsBoard);
+
+    for (; i < savedStats.length; i++) {
+        var newStat = document.createElement("div");
+        newStat.setAttribute('class', 'card text-left');
+        newStat.setAttribute('id', 'statBoard');
+        newStat.innerHTML =  "Name: " + savedStats[i].name + " Stats: " + savedStats[i].score ;
+        highScores.appendChild(newStat);
+    }
 }
 
 // clear scores
@@ -57,9 +87,6 @@ function clearStats () {
 
 
 // Play again
-playAgainBtn.addEventListener("click", playAgain);
-
-function playAgain (event) {
+playAgainBtn.addEventListener("click", function(event){ 
     window.location.reload();
-
-}
+});
