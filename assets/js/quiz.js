@@ -97,13 +97,13 @@ function displayAnswer(correctAnswer) {
     }
 }
 
-function number0() { displayAnswer(0); }
+function displayA() { displayAnswer(0); }
 
-function number1() { displayAnswer(1); }
+function displayB() { displayAnswer(1); }
 
-function number2() { displayAnswer(2); }
+function displayC() { displayAnswer(2); }
 
-function number3() { displayAnswer(3); }
+function displayD() { displayAnswer(3); }
 
 // game over
 function stopGame() {
