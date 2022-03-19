@@ -15,62 +15,64 @@
       </div>
       <div id="endTime" class="col text-right" style="display: none;">Time's Up!</div>
     </div>
-
-    <!-- iniatial page -->
-    <div class="container text-dark text-center p-4" id="startQuizDiv">
-      <h1 class="display-4">Code Quiz!</h1>
-      <p class="lead"> This code quiz covers everything from MERN to simple CSS! Click the button bellow to being your timed quiz</p>
-      <p class="lead">
-        <button
-          class="btn btn-primary btn-lg btn-dark text-light"
-          id="startBtn"
-          href="#"
-          role="button"
-        >
-          Begin
-        </button>
-      </p>
+    <div class="container text-dark text-center p-4" id="welcomePage">
+        <h1 class="display-4">Codeing Quiz Challenge</h1>
+        <p class="lead"> This code quiz covers everything from MERN to simple CSS!</p>
+        <p class="lead">
+        <hr class="my-4">
+        <p>Click the button to begin!</p>
+        <p class="lead">
+          <a class="btn btn-lg btn-dark text-light" href="#" role="button" id="beginQuizBtn">Begin quiz</a>
+        </p>
     </div>
 
-    <div class="container" id="questContainer" style="display: none;">
-      <h2>Question:</h2>
-      <h4 id="questHeader"></h4>
-      <p><button id="btnA" class="btn btn-primary answer-button-click"> 1. </button></p>
-      <p><button id="btnB" class="btn btn-primary answer-button-click"> 2. </button></p>
-      <p><button id="btnC" class="btn btn-primary answer-button-click"> 3. </button></p>
-      <p><button id="btnD" class="btn btn-primary answer-button-click"> 4. </button></p>
-      <p id="notify" style="display:none;"></p>
-      <div>
-        <p id="answerCheck" class=""> </p>
-      </div>
+<!-- display correct via class color change? -->
+    <div class="container" id="renderQuestions" style="display:none;">
+        <h2>Questions:</h2>
+        <h4 id="singleQuestion"></h4>
+        <div id='userAnswers'>
+        <!-- <li><button class="btn btn-primary answerClick" id="answerClickA"> </button></li>
+        <li><button class="btn btn-primary answerClick" id="answerClickB"></button></li>
+        <li><button class="btn btn-primary answerClick" id="answerClickC"></button></li>
+        <li><button class="btn btn-primary answerClick" id ="answerClickD"></button></li> -->
+        </div>
+        <p id="alert" style="display:none;"></p>
+        <div>
+          <p id="correction"> </p>
+        </div>
+        <button class="btn btn-lg btn-dark text-light" id="nextQuestionBtn"> 
+            Next Question
+        </button>
     </div>
 
     <div style="display: none; margin:2%;" id="endGame">
-      <div class="container text-dark text-center p-4" id="">
-        <h1 class="display-4">Game Over!</h1>
-        <div id="nameForm">
-          <h2> Enter Initials: </h2> 
-          <form>
-            <input class="form-control" type="text" placeholder="initials" id="nameInput">
-            <button type="submit" class="btn btn-primary" id="nameBtn">submit</button>
-          </form>
+        <div class="container text-dark text-center p-4" id="">
+          <h1 class="display-4">The game has ended </h1>
+          <div id="nameForm">
+            <h2> Please Enter Initials: </h2> 
+            <form>
+              <input class="form-control" type="text" placeholder="initials" id="nameInput">
+              <button type="submit" class="btn btn-primary" id="nameBtn">submit</button>
+            </form>
+          </div>
+          <hr>
+          <h3> Stats:</h3>
+          <div id="highScores">
+              <div class="card text-center bg-success text-white font-weight-bold" id="scoreDiv">
+                <p> Score:<span id="scoreBoard"></span></p>
+              </div>
+          </div>
+  
+          <button type="submit" class="btn btn-danger text-center" id="clearAllScores" style="display:none;"> Clear Stats </button>
+          <button type="submit" class="btn btn-primary" id="playAgainBtn">Play Again!</button>
         </div>
-        <hr>
-        <h3> Stats:</h3>
-        <div id="highScores">
-            <div class="card text-center bg-success text-white font-weight-bold" id="scoreDiv">
-              <p> Score:<span id="scoreBoard"></span></p>
-            </div>
-        </div>
+    </div>
 
-        <button type="submit" class="btn btn-danger text-center" id="clearAllScores" style="display:none;"> Clear Stats </button>
-        <button type="submit" class="btn btn-primary" id="playAgainBtn">Play Again!</button>
-      </div>
-  </div>
-  </div>
-  </body>
-  <script src="./assets/js/questions.js"></script>
-  <script src="./assets/js/quiz.js"></script>
-  <script src="./assets/js/scoreboard.js"></script>
+
+</body>
+
+<script src="./assets/js/questions.js"></script>
+<script src="./quiz.js"></script>
+<script src="./assets/js/scoreboard.js"></script>
 
 </html>

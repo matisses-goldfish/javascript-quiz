@@ -28,7 +28,7 @@
     align-items: center;
 }
 
-li {
-    margin: 20px;
+#btn {
+    padding: 20px;
     list-style: none
 }

@@ -1,45 +1,46 @@
 // sourced timer: https://stackoverflow.com/questions/44314897/javascript-timer-for-a-quiz 
 // iniatial reference: https://github.com/mmeii/code-quiz/blob/main/Assets/script.js
 
-// Begin quiz elements 
+// Welocome page
 var welcomePage = document.querySelector("#welcomePage");
-var beginQuizBtn = document.querySelector("#beginQuizBtn");
 
+// Begin quiz
+var beginQuizBtn = document.querySelector("#beginQuizBtn");
 beginQuizBtn.addEventListener("click", beginQuiz);
 
-// questions
+// Questions
 var renderQuestions = document.querySelector("#renderQuestions");
 var singleQuestion = document.querySelector("#singleQuestion");
+var userAnswers = document.querySelector("#userAnswers");
 
-var answerClick = document.querySelector(".answerClick");
-
-answerClick.addEventListener("click", alertCorrect);
-
-
+// Iniatialize Answer buttons
 var answerClickA = document.querySelector("#answerClickA");
 var answerClickB = document.querySelector("#answerClickB");
 var answerClickC = document.querySelector("#answerClickC");
 var answerClickD = document.querySelector("#answerClickD");
 
-answerClickA.addEventListener("click", displayA);
-answerClickB.addEventListener("click", displayB);
-answerClickC.addEventListener("click", displayC);
-answerClickD.addEventListener("click", displayD);
+// Check answer 
+// var answerClick = document.querySelector(".answerClick");
+// answerClick.addEventListener("click", alertCorrect);
 
+// answerClickA.addEventListener("click", displayA);
+// answerClickB.addEventListener("click", displayB);
+// answerClickC.addEventListener("click", displayC);
+// answerClickD.addEventListener("click", displayD);
 
-
+// Next Question
 nextQuestionBtn = document.querySelector("#nextQuestionBtn")
 nextQuestionBtn.addEventListener("click", nextQuestion);
 
 var correction = document.querySelector("#correction");
 
-
 // time 
 var time = document.querySelector("#time");
 var remainingTime = document.querySelector("#remainingTime");
 var endTime = document.querySelector("#endTime");
-var totalTime = 101;
 
+// Extra additions (time, scoreboard, and shuffle)
+var quizTimer = 101;
 var playerPoints = 500;
 var questionNumber = 0;
 
@@ -57,27 +58,27 @@ function beginQuiz () {
     time.style.display = "block";
     endTime.style.display = "none";
 
-    // call renderQuestions
+    // call function renderQuestions
     renderQuestionIndex();
 
-    // call renderChoices
+    // call function renderChoices
     renderChoices();
 
-    // call beginTime
+    // call function beginTime
     beginTime();
 }
 
 // quiz timer
 // timer based on: https://stackoverflow.com/questions/44314897/javascript-timer-for-a-quiz 
 function beginTime () {
-    totalTime = 100;
+    quizTimer = 100;
 
     var interval = setInterval(function(){
-        totalTime--;
-        remainingTime.textContent = totalTime;
+        quizTimer--;
+        remainingTime.textContent = quizTimer;
 
-        // totalTime === 0 wasnt computing???
-        if (totalTime <= 0){
+        // quizTimer === 0 wasnt computing???
+        if (quizTimer <= 0){
           clearInterval(interval);
           gameOver();
             
@@ -85,23 +86,46 @@ function beginTime () {
       }, 1000);
     }
 
+    var ulCreate = document.createElement("ul");
+
 // render questions 
 function renderQuestionIndex () {
+    ulCreate.innerHTML = "";
+
         for (var i = 0; i < totalQuest.length; i++) {
         // renders question
         var questionTitle = totalQuest[questionNumber].question;
-        // renders choices
         singleQuestion.textContent = questionTitle;
         }
 }
 
-// render choices 
+var ulCreate = document.createElement("ul");
+var liCreate = document.createElement("li");
+
 function renderChoices () {
-    answerClickA.textContent = totalQuest[questionNumber].choices[0];
-    answerClickB.textContent = totalQuest[questionNumber].choices[1];
-    answerClickC.textContent = totalQuest[questionNumber].choices[2];
-    answerClickD.textContent = totalQuest[questionNumber].choices[3];
+    for (var i = 0; i < totalQuest.length; i++) {
+        // renders choices
+        var answerChoices = totalQuest[questionNumber].choices;
+
+    }
+    answerChoices.forEach(function (newItem) {
+        var newButton = document.createElement("button");
+        newButton.textContent = newItem;
+        newButton.setAttribute('class', 'btn btn-primary answerClick');
+
+        userAnswers.appendChild(ulCreate);
+        ulCreate.appendChild(newButton);
+        newButton.addEventListener("click", (alertCorrect));
+    })
 }
+
+// render choices 
+// function renderChoices () {
+//     answerClickA.textContent = totalQuest[questionNumber].choices[0];
+//     answerClickB.textContent = totalQuest[questionNumber].choices[1];
+//     answerClickC.textContent = totalQuest[questionNumber].choices[2];
+//     answerClickD.textContent = totalQuest[questionNumber].choices[3];
+// }
 
 
 // display correct
@@ -111,8 +135,8 @@ function alertCorrect(correctAnswer) {
         correction.style.display= "block"
         correction.textContent = "Correct! Nicely Done!";
     } else {
-        totalTime -= 10;
-        remainingTime.textContent = totalTime;
+        quizTimer -= 10;
+        remainingTime.textContent = quizTimer;
         correction.style.display= "block";
         correction.textContent = "Wrong! The correct answer is: " + totalQuest[questionNumber].correctAnswer;
     }
