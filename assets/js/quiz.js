@@ -13,20 +13,34 @@ var renderQuestions = document.querySelector("#renderQuestions");
 var singleQuestion = document.querySelector("#singleQuestion");
 var userAnswers = document.querySelector("#userAnswers");
 
-// Iniatialize Answer buttons
-var answerClickA = document.querySelector("#answerClickA");
-var answerClickB = document.querySelector("#answerClickB");
-var answerClickC = document.querySelector("#answerClickC");
-var answerClickD = document.querySelector("#answerClickD");
+// Iniatialize Answer buttons: 
 
-// Check answer 
-// var answerClick = document.querySelector(".answerClick");
-// answerClick.addEventListener("click", alertCorrect);
+    // Button A
+    var answerClickA = document.querySelector("#answerClickA");
+    answerClickA.addEventListener("click", displayA);
+    // checks if the answer selected is correct
+    function displayA() { alertCorrect(0); }
 
-// answerClickA.addEventListener("click", displayA);
-// answerClickB.addEventListener("click", displayB);
-// answerClickC.addEventListener("click", displayC);
-// answerClickD.addEventListener("click", displayD);
+
+    // Button B
+    var answerClickB = document.querySelector("#answerClickB");
+    answerClickB.addEventListener("click", displayB);
+    // checks if the answer selected is correct
+    function displayB() { alertCorrect(1); }
+
+    // Button C
+    var answerClickC = document.querySelector("#answerClickC");
+    answerClickC.addEventListener("click", displayC);
+    // checks if the answer selected is correct
+    function displayC() { alertCorrect(2); }
+
+    // Button D
+    var answerClickD = document.querySelector("#answerClickD");
+    answerClickD.addEventListener("click", displayD);
+    // checks if the answer selected is correct
+    function displayD() { alertCorrect(3); }
+
+
 
 // Next Question
 nextQuestionBtn = document.querySelector("#nextQuestionBtn")
@@ -39,17 +53,19 @@ var time = document.querySelector("#time");
 var remainingTime = document.querySelector("#remainingTime");
 var endTime = document.querySelector("#endTime");
 
+// Game Ends:
+
 // Extra additions (time, scoreboard, and shuffle)
 var quizTimer = 101;
 var playerPoints = 500;
 var questionNumber = 0;
 
 
-
 // shuffle through questions 
 
 // start quiz
 function beginQuiz () {
+    // declare question number in order to shuffle
     questionNumber = 0;
 
     // render elements 
@@ -68,6 +84,25 @@ function beginQuiz () {
     beginTime();
 }
 
+// render questions 
+function renderQuestionIndex () {
+    ulCreate.innerHTML = "";
+
+        for (var i = 0; i < totalQuest.length; i++) {
+        // renders question
+        var questionTitle = totalQuest[questionNumber].question;
+        singleQuestion.textContent = questionTitle;
+        }
+}
+
+// render choices 
+function renderChoices () {
+    answerClickA.textContent = totalQuest[questionNumber].choices[0];
+    answerClickB.textContent = totalQuest[questionNumber].choices[1];
+    answerClickC.textContent = totalQuest[questionNumber].choices[2];
+    answerClickD.textContent = totalQuest[questionNumber].choices[3];
+}
+
 // quiz timer
 // timer based on: https://stackoverflow.com/questions/44314897/javascript-timer-for-a-quiz 
 function beginTime () {
@@ -80,53 +115,14 @@ function beginTime () {
         // quizTimer === 0 wasnt computing???
         if (quizTimer <= 0){
           clearInterval(interval);
-          gameOver();
+          hideElements ();
+          storeAndAppend ();
             
         }
       }, 1000);
     }
 
     var ulCreate = document.createElement("ul");
-
-// render questions 
-function renderQuestionIndex () {
-    ulCreate.innerHTML = "";
-
-        for (var i = 0; i < totalQuest.length; i++) {
-        // renders question
-        var questionTitle = totalQuest[questionNumber].question;
-        singleQuestion.textContent = questionTitle;
-        }
-}
-
-var ulCreate = document.createElement("ul");
-var liCreate = document.createElement("li");
-
-function renderChoices () {
-    for (var i = 0; i < totalQuest.length; i++) {
-        // renders choices
-        var answerChoices = totalQuest[questionNumber].choices;
-
-    }
-    answerChoices.forEach(function (newItem) {
-        var newButton = document.createElement("button");
-        newButton.textContent = newItem;
-        newButton.setAttribute('class', 'btn btn-primary answerClick');
-
-        userAnswers.appendChild(ulCreate);
-        ulCreate.appendChild(newButton);
-        newButton.addEventListener("click", (alertCorrect));
-    })
-}
-
-// render choices 
-// function renderChoices () {
-//     answerClickA.textContent = totalQuest[questionNumber].choices[0];
-//     answerClickB.textContent = totalQuest[questionNumber].choices[1];
-//     answerClickC.textContent = totalQuest[questionNumber].choices[2];
-//     answerClickD.textContent = totalQuest[questionNumber].choices[3];
-// }
-
 
 // display correct
 function alertCorrect(correctAnswer) {
@@ -142,16 +138,9 @@ function alertCorrect(correctAnswer) {
     }
 }
 
-function displayA() { alertCorrect(0); }
-
-function displayB() { alertCorrect(1); }
-
-function displayC() { alertCorrect(2); }
-
-function displayD() { alertCorrect(3); }
 
 
-// formated after displayAnswer from : https://github.com/mmeii/code-quiz/blob/main/Assets/script.js
+
 function nextQuestion() {
     questionNumber++;
     if (questionNumber < totalQuest.length) {
@@ -159,12 +148,14 @@ function nextQuestion() {
         renderChoices();
         correction.style.display= "none"
     } else {
-        gameOver();
+        hideElements ();
+        storeAndAppend ();    
     }
 }
 
 
-function gameOver () {
+// I might be able to remove this 
+function endGame () {
     endGame.style.display = "block";
     renderQuestions.style.display = "none";
     time.style.display = "none";
