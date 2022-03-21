@@ -34,10 +34,13 @@ WHEN I answer a question incorrectly
 THEN time is subtracted from the clock
 WHEN all questions are answered or the timer reaches 0
 THEN the game is over
+```
+## Future Development
+---
+```
 WHEN the game is over
 THEN I can save my initials and my score
 ```
-
 ## Demo
 ---
 ![Landing Page](assets/img/landing.png)
@@ -73,6 +76,7 @@ Any additional question?
 * Gmail: honoregn@gmail.com
 * Github: matisses-goldfish
 
-## Source
+## Sources:
 ---
-Code based on: Mengmei Tu https://github.com/mmeii/code-quiz/blob/main/Assets/script.js
+sourced timer: https://stackoverflow.com/questions/44314897/javascript-timer-for-a-quiz
+iniatial reference: https://github.com/mmeii/code-quiz/blob/main/Assets/script.js
