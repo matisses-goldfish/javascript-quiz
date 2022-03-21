@@ -78,5 +78,5 @@ Any additional question?
 
 ## Sources:
 ---
-sourced timer: https://stackoverflow.com/questions/44314897/javascript-timer-for-a-quiz
-iniatial reference: https://github.com/mmeii/code-quiz/blob/main/Assets/script.js
+* sourced timer: https://stackoverflow.com/questions/44314897/javascript-timer-for-a-quiz
+* iniatial reference: https://github.com/mmeii/code-quiz/blob/main/Assets/script.js
