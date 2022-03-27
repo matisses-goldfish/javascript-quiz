@@ -46,7 +46,6 @@ THEN I can save my initials and my score
 ![Landing Page](assets/img/landing.png)
 ![Questions Page](assets/img/questions.png)
 ![Game Over Page](assets/img/gameover.png)
-![Stats Page](assets/img/stats.png)
 
 
 ## Usage
